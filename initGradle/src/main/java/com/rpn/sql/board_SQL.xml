@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="baord">
+
+	<resultMap id="boardList" type="com.rpn.vo.BoardVo">
+		<result property="boardseq" 		column="BOARDSEQ" />
+		<result property="title" 			column="TITLE" />
+		<result property="content" 			column="CONTENT" />
+		<result property="create_user" 		column="CREATE_USER" />
+		<result property="create_date" 		column="CREATE_DATE" />
+	</resultMap>
+	
+	
+	<select id="listBoard" resultMap="boardList">
+		<![CDATA[
+			SELECT  BOARDSEQ,
+			        TITLE,
+			        CONTENT,
+			        CREATE_USER,
+			        CREATE_DATE
+			FROM    BOARD
+			WHERE   BOARDSEQ < 100
+		]]>
+	</select>
+  
+  	<select id="readBoard" parameterType="String" resultMap="boardList">
+		<![CDATA[
+			SELECT  BOARDSEQ,
+			        TITLE,
+			        CONTENT,
+			        CREATE_USER,
+			        CREATE_DATE
+			FROM    BOARD
+			WHERE 	BOARDSEQ = #{boardSeq}
+		]]>
+	</select>
+</mapper>
